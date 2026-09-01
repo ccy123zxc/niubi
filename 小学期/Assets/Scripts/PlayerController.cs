@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
         {
             key = key + 1;
         }
-        if (collision.CompareTag("Kiwi"))
+        if (collision.CompareTag("ͭǮ"))
         {
             health = health + 1;
             CollectedSound();

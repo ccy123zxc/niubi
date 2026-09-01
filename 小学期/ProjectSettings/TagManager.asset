@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - "\u94DC\u94B1"
+  - Spikes
   layers:
   - Default
   - TransparentFX
