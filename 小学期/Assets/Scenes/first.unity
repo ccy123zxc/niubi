@@ -849,7 +849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpForce: 9
+  jumpForce: 6
   PlayerRigidbody: {fileID: 1068238224}
   healthText: {fileID: 301293063}
   keyText: {fileID: 0}
