@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     [Header("UI控制")]
     public GameObject gameOverUI;
     public GameObject gameEndUI;
+    public GameObject fText;
 
     [Header("音频效果")]
     public AudioClip jumpSound;
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
         playerCollider = GetComponent<CapsuleCollider2D>();//变量赋值
         gameOverUI.gameObject.SetActive(false);//在游戏开始时，关闭激活UI面板
         gameEndUI.gameObject.SetActive(false);
+        fText.gameObject.SetActive(false);
         playerSound = GameObject.Find("PlayerSound").GetComponent<AudioSource>();
     }
 
@@ -119,6 +121,22 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    //角色传送，当角色保持在传送门的触发范围内，并按下F键，可以实现AB点之间的传送
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Portal") && Input.GetKeyDown(KeyCode.F))
+        {
+            fText.SetActive(true);
+            if(collision.name == "Sparkle A" && Input .GetKeyDown(KeyCode.F))
+            {
+                this.transform.position = GameObject.Find("Sparkle B").transform.position;
+            }
+            if(collision.name == "Sparkle B" && Input.GetKeyDown(KeyCode.F))
+            {
+                this.transform.position = GameObject.Find("Sparkle A").transform.position;
+            }
+        }
+    }
     //新建碰撞离开2D方法
     //OnTriggerEnter2D：是当碰撞器碰撞那一瞬间触发的一次指令
     //OnTriggerExit2D:是碰撞器离开时那一瞬间触发的一次指令
@@ -128,6 +146,10 @@ public class PlayerController : MonoBehaviour
         {
             isInSpikes = false;//陷阱中状态为假
             hitCD = false;//将受伤CD关闭
+        }
+        if (collision.CompareTag("Portal"))
+        {
+            fText.SetActive(false);
         }
     }
 
