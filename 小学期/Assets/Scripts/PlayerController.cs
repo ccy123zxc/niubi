@@ -96,6 +96,8 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Spikes"))//如果与陷阱尖刺发生碰撞
         {
             isInSpikes = true;//陷阱中状态为真
+            health = health - 1;
+            anim.SetTrigger("Hit");//在减生命值的同时，运行一次受伤动画
         }
         if (collision.CompareTag("通关key"))
         {
@@ -137,7 +139,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isInSpikes)
         {
-            health -= 1;
+            health = health - 1;
             anim.SetTrigger("Hit");//在减生命值的同时，运行一次受伤动画
             HitSound();
             health = (health < 0) ? 0 : health;//使用三元运算符，来判断health受否小于0
