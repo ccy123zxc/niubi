@@ -78,32 +78,35 @@ public class PlayerController : MonoBehaviour
         healthText.text = "x " + health;//让组件里的text内容为x空格+生命值
                                         //双引号里面是小写x和空格
         keyText.text = key + " / 3";
-        if (!hitCD)//如果在受伤CD外
-        {
-            StartCoroutine(WaitAndHit());//使用StartCoroutine语句执行减生命值协程方法
-        }
+        
+        
     }
     //在Update外面新建触发2d方法。让主角与香蕉发生碰撞时，生命值+1
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("通关key"))
-        {
-            key = key + 1;
-        }
+        
         if (collision.CompareTag("铜钱"))
         {
             health = health + 1;
             CollectedSound();
         }
+        if (collision.CompareTag("绣球"))
+        {
+            key = key + 1;
+        }
         if (collision.CompareTag("Spikes"))//如果与陷阱尖刺发生碰撞
         {
-            isInSpikes = true;//陷阱中状态为真
-            health = health - 1;
-            anim.SetTrigger("Hit");//在减生命值的同时，运行一次受伤动画
+            //isInSpikes = true;//陷阱中状态为真
+            if (!hitCD)//如果在受伤CD外
+            {
+                StartCoroutine(WaitAndHit());//使用StartCoroutine语句执行减生命值协程方法
+            }
+
         }
-        if (collision.CompareTag("通关key"))
+        if (collision.CompareTag("绣球"))
         {
             keyCount++;
+
             Destroy(collision.gameObject);
             if (keyCount >= needToTalKey)
             {
@@ -146,6 +149,7 @@ public class PlayerController : MonoBehaviour
         {
             isInSpikes = false;//陷阱中状态为假
             hitCD = false;//将受伤CD关闭
+            
         }
         if (collision.CompareTag("Portal"))
         {
@@ -159,8 +163,9 @@ public class PlayerController : MonoBehaviour
     //例如，可以使用协程来实现一些需要等待几秒钟或数分钟才能完成的操作，而不必阻塞主线程，时程序保持响应
     private IEnumerator WaitAndHit()
     {
-        if (isInSpikes)
-        {
+        //if (isInSpikes)
+        //{
+            
             health = health - 1;
             anim.SetTrigger("Hit");//在减生命值的同时，运行一次受伤动画
             HitSound();
@@ -169,7 +174,7 @@ public class PlayerController : MonoBehaviour
             hitCD = true;
             yield return new WaitForSeconds(1);
             hitCD = false;
-        }
+        //}
     }
 
     void PlayerDeath()
