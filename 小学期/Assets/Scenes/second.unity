@@ -481,7 +481,7 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 6
   PlayerRigidbody: {fileID: 460154745}
-  healthText: {fileID: 0}
+  healthText: {fileID: 1238342995}
   keyText: {fileID: 0}
   keyCount: 0
   needToTalKey: 3
@@ -833,6 +833,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1377564651585928274, guid: 5e540f748d5abeb45a93b5aa33438bcd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2687911478473580837, guid: 5e540f748d5abeb45a93b5aa33438bcd, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1505,6 +1509,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1377564651585928274, guid: 5e540f748d5abeb45a93b5aa33438bcd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2687911478473580837, guid: 5e540f748d5abeb45a93b5aa33438bcd, type: 3}
       propertyPath: m_RootOrder
       value: 1
