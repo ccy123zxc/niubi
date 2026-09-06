@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
     [Header("UI控制")]
     public GameObject gameOverUI;
     public GameObject gameEndUI;
-    public GameObject fText;
 
     [Header("音频效果")]
     public AudioClip jumpSound;
@@ -53,7 +52,6 @@ public class PlayerController : MonoBehaviour
         playerCollider = GetComponent<CapsuleCollider2D>();//变量赋值
         gameOverUI.gameObject.SetActive(false);//在游戏开始时，关闭激活UI面板
         gameEndUI.gameObject.SetActive(false);
-        fText.gameObject.SetActive(false);
         playerSound = GameObject.Find("PlayerSound").GetComponent<AudioSource>();
     }
 
@@ -129,7 +127,6 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("Portal") && Input.GetKeyDown(KeyCode.F))
         {
-            fText.SetActive(true);
             if(collision.name == "Sparkle A" && Input .GetKeyDown(KeyCode.F))
             {
                 this.transform.position = GameObject.Find("Sparkle B").transform.position;
@@ -150,10 +147,6 @@ public class PlayerController : MonoBehaviour
             isInSpikes = false;//陷阱中状态为假
             hitCD = false;//将受伤CD关闭
             
-        }
-        if (collision.CompareTag("Portal"))
-        {
-            fText.SetActive(false);
         }
     }
 
