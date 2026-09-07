@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;//使用新的命名空间
+using UnityEngine.SceneManagement;
 
 
 public class PlayerController : MonoBehaviour
@@ -112,16 +113,20 @@ public class PlayerController : MonoBehaviour
             {
                 canWin = true;
             }
-            CollectedSound();
+            //CollectedSound();
         }
         if (collision.CompareTag("End"))
         {
-            if (canWin && isWin)
+            Debug.Log("碰到终点了");
+            Debug.Log($"canWin={canWin}  isWin={isWin}");
+            if (canWin && !isWin)
             {
+                Debug.Log("满足条件，准备跳转");
                 isWin = true;
                 PlayerRigidbody.simulated = false;
-                WinSound();
-                gameEndUI.gameObject.SetActive(true);
+                //WinSound();
+                //gameEndUI.gameObject.SetActive(true);
+                Invoke(nameof(LoadNextScene), 0.5f);
             }
         }
     }
@@ -164,7 +169,7 @@ public class PlayerController : MonoBehaviour
             
             health = health - 1;
             anim.SetTrigger("Hit");//在减生命值的同时，运行一次受伤动画
-            HitSound();
+            //HitSound();
             health = (health < 0) ? 0 : health;//使用三元运算符，来判断health受否小于0
                                                //如果是，将其设置为0，否则保持不变
             hitCD = true;
@@ -181,7 +186,7 @@ public class PlayerController : MonoBehaviour
             Destroy(playerCollider);//销毁主角碰撞体
             anim.SetTrigger("Death");//打开死亡动画
             gameOverUI.gameObject.SetActive(true);//让主角死的时候，打开gameOver面板
-            DeadSound();
+            //DeadSound();
         }
     }
 
@@ -208,7 +213,7 @@ public class PlayerController : MonoBehaviour
             if (isGrounded)
             {
                 PlayerRigidbody.velocity = new Vector2(PlayerRigidbody.velocity.x, jumpForce);
-                JumpSound();
+                //JumpSound();
             }
             else
             {
@@ -216,7 +221,7 @@ public class PlayerController : MonoBehaviour
                 {
                     PlayerRigidbody.velocity = new Vector2(PlayerRigidbody.velocity.x, jumpForce);
                     canDoubleJump = false;
-                    JumpSound();
+                    //JumpSound();
                 }
             }
         }
@@ -248,8 +253,7 @@ public class PlayerController : MonoBehaviour
     }
     private void LoadNextScene()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1
         );
     }
 }
