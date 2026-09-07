@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
     public LayerMask GroundLayer;//8.声明变量：地面图层
     [Header("UI控制")]
     public GameObject gameOverUI;
-    public GameObject gameEndUI;
 
     [Header("音频效果")]
     public AudioClip jumpSound;
@@ -53,7 +52,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();//在start方法里，给anim赋值。让anim等于player的动画器。
         playerCollider = GetComponent<CapsuleCollider2D>();//变量赋值
         gameOverUI.gameObject.SetActive(false);//在游戏开始时，关闭激活UI面板
-        gameEndUI.gameObject.SetActive(false);
+        //gameEndUI.gameObject.SetActive(false);
         playerSound = GameObject.Find("PlayerSound").GetComponent<AudioSource>();
     }
 
@@ -89,7 +88,7 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("铜钱"))
         {
             health = health + 1;
-            CollectedSound();
+            //CollectedSound();
         }
         if (collision.CompareTag("绣球"))
         {
