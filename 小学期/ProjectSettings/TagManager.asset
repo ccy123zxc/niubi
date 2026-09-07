@@ -7,6 +7,8 @@ TagManager:
   - "\u94DC\u94B1"
   - Spikes
   - Portal
+  - "\u7EE3\u7403"
+  - End
   layers:
   - Default
   - TransparentFX

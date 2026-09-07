@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     bool hitCD = false;//新建变量：受伤CD
     bool isInSpikes = false;//新建变量：代表是否在陷阱中的状态
     bool canWin = false;
+    private bool isWin = false;
 
     void Start()
     {
@@ -57,6 +58,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (isWin) return;
         if (health > 0)
         {
             PlayerMove();
@@ -114,9 +116,10 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.CompareTag("End"))
         {
-            if (canWin)
+            if (canWin && isWin)
             {
-                Destroy(PlayerRigidbody);
+                isWin = true;
+                PlayerRigidbody.simulated = false;
                 WinSound();
                 gameEndUI.gameObject.SetActive(true);
             }
@@ -242,5 +245,11 @@ public class PlayerController : MonoBehaviour
     {
         playerSound.clip = winSound;
         playerSound.Play();
+    }
+    private void LoadNextScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(
+            UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1
+        );
     }
 }
