@@ -49,6 +49,6 @@ public class UIController : MonoBehaviour
     }
     void GoToMenu()
     {
-        SceneManager.LoadSceneAsync("Main Mune");
+        SceneManager.LoadSceneAsync("SampleScene");
     }
 }
