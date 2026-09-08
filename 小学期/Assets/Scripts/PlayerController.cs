@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask GroundLayer;//8.声明变量：地面图层
     [Header("UI控制")]
     public GameObject gameOverUI;
+    public GameObject gameEndUI;
 
     [Header("音频效果")]
     public AudioClip jumpSound;
@@ -52,7 +53,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();//在start方法里，给anim赋值。让anim等于player的动画器。
         playerCollider = GetComponent<CapsuleCollider2D>();//变量赋值
         gameOverUI.gameObject.SetActive(false);//在游戏开始时，关闭激活UI面板
-        //gameEndUI.gameObject.SetActive(false);
+        gameEndUI.gameObject.SetActive(false);
         playerSound = GameObject.Find("PlayerSound").GetComponent<AudioSource>();
     }
 
@@ -88,7 +89,7 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("铜钱"))
         {
             health = health + 1;
-            //CollectedSound();
+            CollectedSound();
         }
         if (collision.CompareTag("绣球"))
         {
@@ -96,7 +97,7 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.CompareTag("Spikes"))//如果与陷阱尖刺发生碰撞
         {
-           isInSpikes = true;//陷阱中状态为真
+            //isInSpikes = true;//陷阱中状态为真
             if (!hitCD)//如果在受伤CD外
             {
                 StartCoroutine(WaitAndHit());//使用StartCoroutine语句执行减生命值协程方法
@@ -112,7 +113,7 @@ public class PlayerController : MonoBehaviour
             {
                 canWin = true;
             }
-            CollectedSound();
+            //CollectedSound();
         }
         if (collision.CompareTag("End"))
         {
@@ -123,8 +124,8 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("满足条件，准备跳转");
                 isWin = true;
                 PlayerRigidbody.simulated = false;
-                WinSound();
-                gameEndUI.gameObject.SetActive(true);
+                //WinSound();
+                //gameEndUI.gameObject.SetActive(true);
                 Invoke(nameof(LoadNextScene), 0.5f);
             }
         }
@@ -144,7 +145,9 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    //新建碰撞离开2D方法
+    //OnTriggerEnter2D：是当碰撞器碰撞那一瞬间触发的一次指令
+    //OnTriggerExit2D:是碰撞器离开时那一瞬间触发的一次指令
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Spikes"))//如果离开尖刺
@@ -161,18 +164,18 @@ public class PlayerController : MonoBehaviour
     //例如，可以使用协程来实现一些需要等待几秒钟或数分钟才能完成的操作，而不必阻塞主线程，时程序保持响应
     private IEnumerator WaitAndHit()
     {
-        if (isInSpikes)
-        {
+        //if (isInSpikes)
+        //{
             
             health = health - 1;
             anim.SetTrigger("Hit");//在减生命值的同时，运行一次受伤动画
-            HitSound();
+            //HitSound();
             health = (health < 0) ? 0 : health;//使用三元运算符，来判断health受否小于0
                                                //如果是，将其设置为0，否则保持不变
             hitCD = true;
             yield return new WaitForSeconds(1);
             hitCD = false;
-        }
+        //}
     }
 
     void PlayerDeath()
@@ -183,7 +186,7 @@ public class PlayerController : MonoBehaviour
             Destroy(playerCollider);//销毁主角碰撞体
             anim.SetTrigger("Death");//打开死亡动画
             gameOverUI.gameObject.SetActive(true);//让主角死的时候，打开gameOver面板
-            DeadSound();
+            //DeadSound();
         }
     }
 
@@ -210,7 +213,7 @@ public class PlayerController : MonoBehaviour
             if (isGrounded)
             {
                 PlayerRigidbody.velocity = new Vector2(PlayerRigidbody.velocity.x, jumpForce);
-                JumpSound();
+                //JumpSound();
             }
             else
             {
@@ -218,7 +221,7 @@ public class PlayerController : MonoBehaviour
                 {
                     PlayerRigidbody.velocity = new Vector2(PlayerRigidbody.velocity.x, jumpForce);
                     canDoubleJump = false;
-                    JumpSound();
+                    //JumpSound();
                 }
             }
         }
