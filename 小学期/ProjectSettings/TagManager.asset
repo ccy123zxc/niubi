@@ -8,7 +8,11 @@ TagManager:
   - Spikes
   - Portal
   - "\u7EE3\u7403"
+<<<<<<< Updated upstream
   - End
+=======
+  - Ground
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
