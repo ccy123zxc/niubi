@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Spikes
+  - "\u94DC\u94B1"
+  - "\u7EE3\u7403"
+  - Portal
+  - End
+  - Ground
   layers:
   - Default
   - TransparentFX
