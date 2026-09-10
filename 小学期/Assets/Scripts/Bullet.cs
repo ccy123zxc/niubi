@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float bulletSpeed = 8;//子弹速度默认为8
+    public float bulletSpeed = 12;
     Animator bulletAinmator;//关联动画器
     bool canMove = true;//子弹是否可以移动
 

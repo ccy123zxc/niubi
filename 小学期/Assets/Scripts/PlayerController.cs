@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
                 isWin = true;
                 PlayerRigidbody.simulated = false;
                 WinSound();
-                Invoke(nameof(LoadNextScene), 0.5f);
+                Invoke(nameof(LoadNextScene), 2f);
                 
             }
         }
@@ -262,8 +262,7 @@ public class PlayerController : MonoBehaviour
     }
     private void LoadNextScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1
-        );
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1 );
     }
     //下一关按钮
     public void NextLevel()

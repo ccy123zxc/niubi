@@ -34,7 +34,7 @@ public class PlantController : MonoBehaviour
         {
             plantAnimator.SetTrigger("Dead");//运行死亡动画
             DeadSound();//播放死亡声音
-            deadTriggerFired = true; //标记死亡已经触发，后面不再重复执行
+            deadTriggerFired = true; 
         }
 
         if (isPlantDead) return;
@@ -46,7 +46,7 @@ public class PlantController : MonoBehaviour
 
         plantAnimator.SetTrigger("Attack");//运行攻击动画
         attackCD = true;//打开攻击CD
-        yield return new WaitForSeconds(2);//CD为2秒
+        yield return new WaitForSeconds(1);//CD为2秒
         attackCD = false;//2秒后关闭CD
 
         //玩家还在范围内，继续循环攻击
