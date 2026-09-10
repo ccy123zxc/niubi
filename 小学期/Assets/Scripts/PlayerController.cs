@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Õ≠«Æ"))
         {
             health = health + 1;
-            //CollectedSound();
+            CollectedSound();
         }
         if (collision.CompareTag("–Â«Ú"))
         {
@@ -124,7 +124,6 @@ public class PlayerController : MonoBehaviour
                 isWin = true;
                 PlayerRigidbody.simulated = false;
                 WinSound();
-                //gameEndUI.gameObject.SetActive(true);
                 Invoke(nameof(LoadNextScene), 0.5f);
             }
         }
