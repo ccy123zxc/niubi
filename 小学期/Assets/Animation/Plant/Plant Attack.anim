@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NPC Attack
+  m_Name: Plant Attack
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,18 +21,18 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 4114111432495891202, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
-    - time: 0.1
+    - time: 0.083333336
       value: {fileID: 1404240895519133374, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
     - time: 0.18333334
       value: {fileID: -878275179285171030, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
-    - time: 0.28333333
+    - time: 0.26666668
       value: {fileID: -7532476932650681572, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
-    - time: 0.38333333
+    - time: 0.4
       value: {fileID: -5444616188093435142, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
     - time: 0.48333332
       value: {fileID: 3576266851605089446, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
-    - time: 0.56666666
-      value: {fileID: -7532476932650681572, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
+    - time: 0.5833333
+      value: {fileID: 6117172992526248574, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
     - time: 0.6666667
       value: {fileID: 950257295226654881, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
     attribute: m_Sprite
@@ -60,7 +60,7 @@ AnimationClip:
     - {fileID: -7532476932650681572, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
     - {fileID: -5444616188093435142, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
     - {fileID: 3576266851605089446, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
-    - {fileID: -7532476932650681572, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
+    - {fileID: 6117172992526248574, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
     - {fileID: 950257295226654881, guid: f85ccb91ff4f71d44808845949b0798b, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -87,7 +87,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.55
+  - time: 0.6
     functionName: BulletShoot
     data: 
     objectReferenceParameter: {fileID: 0}

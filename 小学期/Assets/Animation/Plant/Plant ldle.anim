@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NPC Idle
+  m_Name: Plant ldle
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -31,15 +31,15 @@ AnimationClip:
       value: {fileID: 4697812028538531935, guid: 326dd6eeaa0ca144ca01194dbacf63fa, type: 3}
     - time: 0.33333334
       value: {fileID: 30863249446853461, guid: 326dd6eeaa0ca144ca01194dbacf63fa, type: 3}
-    - time: 0.41666666
+    - time: 0.4
       value: {fileID: 1280757132483187777, guid: 326dd6eeaa0ca144ca01194dbacf63fa, type: 3}
-    - time: 0.48333332
+    - time: 0.46666667
       value: {fileID: 6339920940883149566, guid: 326dd6eeaa0ca144ca01194dbacf63fa, type: 3}
-    - time: 0.55
+    - time: 0.53333336
       value: {fileID: 2352058606110595977, guid: 326dd6eeaa0ca144ca01194dbacf63fa, type: 3}
-    - time: 0.6166667
+    - time: 0.6
       value: {fileID: -2315217716564799900, guid: 326dd6eeaa0ca144ca01194dbacf63fa, type: 3}
-    - time: 0.68333334
+    - time: 0.6666667
       value: {fileID: -4258698599350678331, guid: 326dd6eeaa0ca144ca01194dbacf63fa, type: 3}
     attribute: m_Sprite
     path: 
@@ -76,7 +76,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.7
+    m_StopTime: 0.68333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
