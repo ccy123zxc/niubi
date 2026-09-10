@@ -1,38 +1,40 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;//Ê¹ÓÃĞÂµÄÃüÃû¿Õ¼ä
+using UnityEngine.UI;//ä½¿ç”¨æ–°çš„å‘½åç©ºé—´
 using UnityEngine.SceneManagement;
 
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("ÒÆ¶¯")]//4.ĞÂ½¨Ò»¸ö±êÌâÀ¸£ºÒÆ¶¯£¬±íÊ¾ÕâĞ©±äÁ¿ÊÇÒÆ¶¯Ïà¹ØµÄ±äÁ¿
-    public float moveSpeed;//1.ÉùÃ÷±äÁ¿£¬ÒÆ¶¯ËÙ¶È
+    [Header("ç§»åŠ¨")]//4.æ–°å»ºä¸€ä¸ªæ ‡é¢˜æ ï¼šç§»åŠ¨ï¼Œè¡¨ç¤ºè¿™äº›å˜é‡æ˜¯ç§»åŠ¨ç›¸å…³çš„å˜é‡
+    public float moveSpeed;//1.å£°æ˜å˜é‡ï¼Œç§»åŠ¨é€Ÿåº¦
 
-    [Header("ÌøÔ¾")]//5.ĞÂ½¨ÌøÔ¾Ïà¹ØµÄ±äÁ¿
-    public float jumpForce;//5.ÉùÃ÷±äÁ¿£ºÌøÔ¾Ç¿¶È
-    bool canDoubleJump;//12.ÉùÃ÷±äÁ¿£ºÊÇ·ñÄÜ½øĞĞ¶ş´ÎÌøÔ¾
+    [Header("è·³è·ƒ")]//5.æ–°å»ºè·³è·ƒç›¸å…³çš„å˜é‡
+    public float jumpForce;//5.å£°æ˜å˜é‡ï¼šè·³è·ƒå¼ºåº¦
+    bool canDoubleJump;//12.å£°æ˜å˜é‡ï¼šæ˜¯å¦èƒ½è¿›è¡ŒäºŒæ¬¡è·³è·ƒ
 
-    [Header("×é¼ş")]//4.ĞÂ½¨Ò»¸ö±êÌâÀ¸£º×é¼ş£¬±íÊ¾ÕâĞ©±äÁ¿ÊÇ×é¼şÏà¹ØµÄ±äÁ¿
-    public Rigidbody2D PlayerRigidbody;//2.ÉùÃ÷±äÁ¿£º¸ÕÌå2D×é¼şÀàĞÍµÄ±äÁ¿£¬
-                                       //·½±ãÎÒÃÇ»ñÈ¡Ê¹ÓÃ»òĞŞ¸Ä¸ÕÌå2D×é¼şÀïµÄĞÅÏ¢
-    public Text healthText;//ĞÂ½¨±äÁ¿£¬ÈÃËûµÈÓÚÉúÃüÖµUI.Text×é¼ş
+    [Header("ç»„ä»¶")]//4.æ–°å»ºä¸€ä¸ªæ ‡é¢˜æ ï¼šç»„ä»¶ï¼Œè¡¨ç¤ºè¿™äº›å˜é‡æ˜¯ç»„ä»¶ç›¸å…³çš„å˜é‡
+    public Rigidbody2D PlayerRigidbody;//2.å£°æ˜å˜é‡ï¼šåˆšä½“2Dç»„ä»¶ç±»å‹çš„å˜é‡ï¼Œ
+                                       //æ–¹ä¾¿æˆ‘ä»¬è·å–ä½¿ç”¨æˆ–ä¿®æ”¹åˆšä½“2Dç»„ä»¶é‡Œçš„ä¿¡æ¯
+    public Text healthText;//æ–°å»ºå˜é‡ï¼Œè®©ä»–ç­‰äºç”Ÿå‘½å€¼UI.Textç»„ä»¶
     public Text keyText;
-    [Header("keyÊÕ¼¯")]
+    [Header("keyæ”¶é›†")]
     public int keyCount = 0;
     public int needToTalKey = 3;
-    Collider2D playerCollider;//½ÇÉ«Åö×²Æ÷
-    [Header("¶¯»­Æ÷")]
-    Animator anim;//ĞÂ½¨±êÌâ£¬²¢ÇÒÉùÃ÷±äÁ¿£ºË½ÃÜµÄ¶¯»­Æ÷¡¾anim¡¿
-    [Header("µØÃæ¼ì²â")]//7.ĞÂ½¨±êÌâÀ¸£ºµØÃæ¼ì²â
-    bool isGrounded;//9.ÉùÃ÷Ë½ÃÜ±äÁ¿£ºÊÇ·ñÅö×²µ½µØÃæ
-    public Transform groundCheckpoint;//ÉùÃ÷±äÁ¿£ºµØÃæÅö×²¼ì²âµã
-    public LayerMask GroundLayer;//8.ÉùÃ÷±äÁ¿£ºµØÃæÍ¼²ã
-    [Header("UI¿ØÖÆ")]
+    Collider2D playerCollider;//è§’è‰²ç¢°æ’å™¨
+    [Header("åŠ¨ç”»å™¨")]
+    Animator anim;//æ–°å»ºæ ‡é¢˜ï¼Œå¹¶ä¸”å£°æ˜å˜é‡ï¼šç§å¯†çš„åŠ¨ç”»å™¨ã€animã€‘
+    [Header("åœ°é¢æ£€æµ‹")]//7.æ–°å»ºæ ‡é¢˜æ ï¼šåœ°é¢æ£€æµ‹
+    bool isGrounded;//9.å£°æ˜ç§å¯†å˜é‡ï¼šæ˜¯å¦ç¢°æ’åˆ°åœ°é¢
+    public Transform groundCheckpoint;//å£°æ˜å˜é‡ï¼šåœ°é¢ç¢°æ’æ£€æµ‹ç‚¹
+    public LayerMask GroundLayer;//8.å£°æ˜å˜é‡ï¼šåœ°é¢å›¾å±‚
+    [Header("UIæ§åˆ¶")]
     public GameObject gameOverUI;
+    //public GameObject winUI;
+    
 
-    [Header("ÒôÆµĞ§¹û")]
+    [Header("éŸ³é¢‘æ•ˆæœ")]
     public AudioClip jumpSound;
     public AudioClip collectedSound;
     public AudioClip hitSound;
@@ -40,20 +42,25 @@ public class PlayerController : MonoBehaviour
     public AudioClip winSound;
     AudioSource playerSound;
 
-    int health = 3;//ĞÂ½¨±äÁ¿ÉúÃüÖµ
+    int health = 3;//æ–°å»ºå˜é‡ç”Ÿå‘½å€¼
     int key = 0;
-    bool hitCD = false;//ĞÂ½¨±äÁ¿£ºÊÜÉËCD
-    bool isInSpikes = false;//ĞÂ½¨±äÁ¿£º´ú±íÊÇ·ñÔÚÏİÚåÖĞµÄ×´Ì¬
+    bool hitCD = false;//æ–°å»ºå˜é‡ï¼šå—ä¼¤CD
+    bool isInSpikes = false;//æ–°å»ºå˜é‡ï¼šä»£è¡¨æ˜¯å¦åœ¨é™·é˜±ä¸­çš„çŠ¶æ€
     bool canWin = false;
     private bool isWin = false;
+    public int CurrentLevel;
 
     void Start()
     {
-        anim = GetComponent<Animator>();//ÔÚstart·½·¨Àï£¬¸øanim¸³Öµ¡£ÈÃanimµÈÓÚplayerµÄ¶¯»­Æ÷¡£
-        playerCollider = GetComponent<CapsuleCollider2D>();//±äÁ¿¸³Öµ
-        gameOverUI.gameObject.SetActive(false);//ÔÚÓÎÏ·¿ªÊ¼Ê±£¬¹Ø±Õ¼¤»îUIÃæ°å
+        anim = GetComponent<Animator>();//åœ¨startæ–¹æ³•é‡Œï¼Œç»™animèµ‹å€¼ã€‚è®©animç­‰äºplayerçš„åŠ¨ç”»å™¨ã€‚
+        playerCollider = GetComponent<CapsuleCollider2D>();//å˜é‡èµ‹å€¼
+        gameOverUI.gameObject.SetActive(false);//åœ¨æ¸¸æˆå¼€å§‹æ—¶ï¼Œå…³é—­æ¿€æ´»UIé¢æ¿
         //gameEndUI.gameObject.SetActive(false);
+        //winUI.SetActive(false);
         playerSound = GameObject.Find("PlayerSound").GetComponent<AudioSource>();
+        keyCount = 0;
+        canWin = false;
+        isWin = false;
     }
 
     void Update()
@@ -68,42 +75,42 @@ public class PlayerController : MonoBehaviour
         if (isGrounded)
             canDoubleJump = true;
 
-        //¹ØÁª¶¯»­Æ÷ÀïµÄ²ÎÊı£¬ÈÃmoveSpeed=½ÇÉ«¸ÕÌåxÖáµÄÒÆ¶¯ËÙ¶È¡£isGround=´úÂëÖĞµÄisGrounded±äÁ¿¡£
+        //å…³è”åŠ¨ç”»å™¨é‡Œçš„å‚æ•°ï¼Œè®©moveSpeed=è§’è‰²åˆšä½“xè½´çš„ç§»åŠ¨é€Ÿåº¦ã€‚isGround=ä»£ç ä¸­çš„isGroundedå˜é‡ã€‚
         anim.SetFloat("moveSpeed", Mathf.Abs(PlayerRigidbody.velocity.x));
         anim.SetBool("isGrounded", isGrounded);
-        //¹ØÁª¶¯»­Æ÷"jumpSpeed"²ÎÊı=½ÇÉ«yÖáÒÆ¶¯ËÙ¶È¡£ÕâÀï²»ĞèÒªÊ¹ÓÃ¾ø¶ÔÖµ£¬¾Í²»ĞèÒªÊ¹ÓÃMathf.Abs·½·¨
-        //²¹³ä£ºMath.AbsÊÇÈ¡Êı×Ö¾ø¶ÔÖµµÄ·½·¨¡£ÒòÎªmoveSpeedÎÒÃÇÖ»ĞèÒª¶ÁÈ¡ÕıÊı£¬ËùÒÔÊ¹ÓÃÁËÕâ¸ö·½·¨
+        //å…³è”åŠ¨ç”»å™¨"jumpSpeed"å‚æ•°=è§’è‰²yè½´ç§»åŠ¨é€Ÿåº¦ã€‚è¿™é‡Œä¸éœ€è¦ä½¿ç”¨ç»å¯¹å€¼ï¼Œå°±ä¸éœ€è¦ä½¿ç”¨Mathf.Absæ–¹æ³•
+        //è¡¥å……ï¼šMath.Absæ˜¯å–æ•°å­—ç»å¯¹å€¼çš„æ–¹æ³•ã€‚å› ä¸ºmoveSpeedæˆ‘ä»¬åªéœ€è¦è¯»å–æ­£æ•°ï¼Œæ‰€ä»¥ä½¿ç”¨äº†è¿™ä¸ªæ–¹æ³•
         anim.SetFloat("jumpSpeed", PlayerRigidbody.velocity.y);
 
-        healthText.text = "x " + health;//ÈÃ×é¼şÀïµÄtextÄÚÈİÎªx¿Õ¸ñ+ÉúÃüÖµ
-                                        //Ë«ÒıºÅÀïÃæÊÇĞ¡Ğ´xºÍ¿Õ¸ñ
+        healthText.text = "x " + health;//è®©ç»„ä»¶é‡Œçš„textå†…å®¹ä¸ºxç©ºæ ¼+ç”Ÿå‘½å€¼
+                                        //åŒå¼•å·é‡Œé¢æ˜¯å°å†™xå’Œç©ºæ ¼
         keyText.text = key + " / 3";
         
         
     }
-    //ÔÚUpdateÍâÃæĞÂ½¨´¥·¢2d·½·¨¡£ÈÃÖ÷½ÇÓëÏã½¶·¢ÉúÅö×²Ê±£¬ÉúÃüÖµ+1
+    //åœ¨Updateå¤–é¢æ–°å»ºè§¦å‘2dæ–¹æ³•ã€‚è®©ä¸»è§’ä¸é¦™è•‰å‘ç”Ÿç¢°æ’æ—¶ï¼Œç”Ÿå‘½å€¼+1
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
-        if (collision.CompareTag("Í­Ç®"))
+        if (collision.CompareTag("é“œé’±"))
         {
             health = health + 1;
             CollectedSound();
         }
-        if (collision.CompareTag("ĞåÇò"))
+        if (collision.CompareTag("ç»£çƒ"))
         {
             key = key + 1;
         }
-        if (collision.CompareTag("Spikes"))//Èç¹ûÓëÏİÚå¼â´Ì·¢ÉúÅö×²
+        if (collision.CompareTag("Spikes"))//å¦‚æœä¸é™·é˜±å°–åˆºå‘ç”Ÿç¢°æ’
         {
-           isInSpikes = true;//ÏİÚåÖĞ×´Ì¬ÎªÕæ
-            if (!hitCD)//Èç¹ûÔÚÊÜÉËCDÍâ
+           isInSpikes = true;//é™·é˜±ä¸­çŠ¶æ€ä¸ºçœŸ
+            if (!hitCD)//å¦‚æœåœ¨å—ä¼¤CDå¤–
             {
-                StartCoroutine(WaitAndHit());//Ê¹ÓÃStartCoroutineÓï¾äÖ´ĞĞ¼õÉúÃüÖµĞ­³Ì·½·¨
+                StartCoroutine(WaitAndHit());//ä½¿ç”¨StartCoroutineè¯­å¥æ‰§è¡Œå‡ç”Ÿå‘½å€¼åç¨‹æ–¹æ³•
             }
 
         }
-        if (collision.CompareTag("ĞåÇò"))
+        if (collision.CompareTag("ç»£çƒ"))
         {
             keyCount++;
 
@@ -116,19 +123,20 @@ public class PlayerController : MonoBehaviour
         }
         if (collision.CompareTag("End"))
         {
-            Debug.Log("Åöµ½ÖÕµãÁË");
+            Debug.Log("ç¢°åˆ°ç»ˆç‚¹äº†");
             Debug.Log($"canWin={canWin}  isWin={isWin}");
             if (canWin && !isWin)
             {
-                Debug.Log("Âú×ãÌõ¼ş£¬×¼±¸Ìø×ª");
+                Debug.Log("æ»¡è¶³æ¡ä»¶ï¼Œå‡†å¤‡è·³è½¬");
                 isWin = true;
                 PlayerRigidbody.simulated = false;
                 WinSound();
                 Invoke(nameof(LoadNextScene), 0.5f);
+                
             }
         }
     }
-    //½ÇÉ«´«ËÍ£¬µ±½ÇÉ«±£³ÖÔÚ´«ËÍÃÅµÄ´¥·¢·¶Î§ÄÚ£¬²¢°´ÏÂF¼ü£¬¿ÉÒÔÊµÏÖABµãÖ®¼äµÄ´«ËÍ
+    //è§’è‰²ä¼ é€ï¼Œå½“è§’è‰²ä¿æŒåœ¨ä¼ é€é—¨çš„è§¦å‘èŒƒå›´å†…ï¼Œå¹¶æŒ‰ä¸‹Fé”®ï¼Œå¯ä»¥å®ç°ABç‚¹ä¹‹é—´çš„ä¼ é€
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Portal") && Input.GetKeyDown(KeyCode.F))
@@ -146,28 +154,33 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Spikes"))//Èç¹ûÀë¿ª¼â´Ì
+        if (collision.CompareTag("Spikes"))//å¦‚æœç¦»å¼€å°–åˆº
         {
-            isInSpikes = false;//ÏİÚåÖĞ×´Ì¬Îª¼Ù
-            hitCD = false;//½«ÊÜÉËCD¹Ø±Õ
+            isInSpikes = false;//é™·é˜±ä¸­çŠ¶æ€ä¸ºå‡
+            hitCD = false;//å°†å—ä¼¤CDå…³é—­
             
         }
     }
 
-    //ĞÂ½¨Ğ­³Ì£¨IEnumerator£©·½·¨WaitAndHit£¨£©
-    //ÈÃ½ÇÉ«ÔÚÅö×²µ½ÏİÚåÊ±ÊÜÉËÒ»´Î£¬²¢ÇÒÃ¿ÔÚÏİÚå´ôÒ»Ãë¾ÍÊÜÉËÒ»´Î
-    //Ğ­³Ì¿ÉÒÔÔÚÌØ¶¨µÄÊ±¼äµãÔİÍ£×Ô¼ºµÄÖ´ĞĞ£¬È»ºóÔÙÉÔºóµÄÊ±¼äµã»Ö¸´Ö´ĞĞ
-    //ÀıÈç£¬¿ÉÒÔÊ¹ÓÃĞ­³ÌÀ´ÊµÏÖÒ»Ğ©ĞèÒªµÈ´ı¼¸ÃëÖÓ»òÊı·ÖÖÓ²ÅÄÜÍê³ÉµÄ²Ù×÷£¬¶ø²»±Ø×èÈûÖ÷Ïß³Ì£¬Ê±³ÌĞò±£³ÖÏìÓ¦
+    //æ–°å»ºåç¨‹ï¼ˆIEnumeratorï¼‰æ–¹æ³•WaitAndHitï¼ˆï¼‰
+    //è®©è§’è‰²åœ¨ç¢°æ’åˆ°é™·é˜±æ—¶å—ä¼¤ä¸€æ¬¡ï¼Œå¹¶ä¸”æ¯åœ¨é™·é˜±å‘†ä¸€ç§’å°±å—ä¼¤ä¸€æ¬¡
+    //åç¨‹å¯ä»¥åœ¨ç‰¹å®šçš„æ—¶é—´ç‚¹æš‚åœè‡ªå·±çš„æ‰§è¡Œï¼Œç„¶åå†ç¨åçš„æ—¶é—´ç‚¹æ¢å¤æ‰§è¡Œ
+    //ä¾‹å¦‚ï¼Œå¯ä»¥ä½¿ç”¨åç¨‹æ¥å®ç°ä¸€äº›éœ€è¦ç­‰å¾…å‡ ç§’é’Ÿæˆ–æ•°åˆ†é’Ÿæ‰èƒ½å®Œæˆçš„æ“ä½œï¼Œè€Œä¸å¿…é˜»å¡ä¸»çº¿ç¨‹ï¼Œæ—¶ç¨‹åºä¿æŒå“åº”
     private IEnumerator WaitAndHit()
     {
         if (isInSpikes)
         {
             
             health = health - 1;
-            anim.SetTrigger("Hit");//ÔÚ¼õÉúÃüÖµµÄÍ¬Ê±£¬ÔËĞĞÒ»´ÎÊÜÉË¶¯»­
+            anim.SetTrigger("Hit");//åœ¨å‡ç”Ÿå‘½å€¼çš„åŒæ—¶ï¼Œè¿è¡Œä¸€æ¬¡å—ä¼¤åŠ¨ç”»
             HitSound();
-            health = (health < 0) ? 0 : health;//Ê¹ÓÃÈıÔªÔËËã·û£¬À´ÅĞ¶ÏhealthÊÜ·ñĞ¡ÓÚ0
-                                               //Èç¹ûÊÇ£¬½«ÆäÉèÖÃÎª0£¬·ñÔò±£³Ö²»±ä
+            health = (health < 0) ? 0 : health;//ä½¿ç”¨ä¸‰å…ƒè¿ç®—ç¬¦ï¼Œæ¥åˆ¤æ–­healthå—å¦å°äº0
+                                               //å¦‚æœæ˜¯ï¼Œå°†å…¶è®¾ç½®ä¸º0ï¼Œå¦åˆ™ä¿æŒä¸å˜
+            if(health <=0)
+            {
+                PlayerDeath();
+                yield break;
+            }
             hitCD = true;
             yield return new WaitForSeconds(1);
             hitCD = false;
@@ -178,10 +191,10 @@ public class PlayerController : MonoBehaviour
     {
         if (health == 0)
         {
-            PlayerRigidbody.velocity = new Vector2(PlayerRigidbody.velocity.x, 3);//ÈÃ½ÇÉ«ÌøÒ»ÏÂËÀ
-            Destroy(playerCollider);//Ïú»ÙÖ÷½ÇÅö×²Ìå
-            anim.SetTrigger("Death");//´ò¿ªËÀÍö¶¯»­
-            gameOverUI.gameObject.SetActive(true);//ÈÃÖ÷½ÇËÀµÄÊ±ºò£¬´ò¿ªgameOverÃæ°å
+            PlayerRigidbody.velocity = new Vector2(PlayerRigidbody.velocity.x, 3);//è®©è§’è‰²è·³ä¸€ä¸‹æ­»
+            Destroy(playerCollider);//é”€æ¯ä¸»è§’ç¢°æ’ä½“
+            anim.SetTrigger("Death");//æ‰“å¼€æ­»äº¡åŠ¨ç”»
+            gameOverUI.gameObject.SetActive(true);//è®©ä¸»è§’æ­»çš„æ—¶å€™ï¼Œæ‰“å¼€gameOveré¢æ¿
             DeadSound();
         }
     }
@@ -251,5 +264,18 @@ public class PlayerController : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1
         );
+    }
+    //ä¸‹ä¸€å…³æŒ‰é’®
+    public void NextLevel()
+    {
+        Time.timeScale = 1; //æ¢å¤æ¸¸æˆæ—¶é—´
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    //è¿”å›ä¸»èœå•æŒ‰é’®
+    public void BackToMenu()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0); //åœºæ™¯0æ˜¯ä¸»èœå•
     }
 }

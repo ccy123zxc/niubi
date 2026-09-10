@@ -11,6 +11,7 @@ TagManager:
   - End
   - Ground
   - PlayAttack
+  - "\u80DC\u5229\u65D7\u5E1C"
   layers:
   - Default
   - TransparentFX

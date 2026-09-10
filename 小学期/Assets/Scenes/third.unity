@@ -12956,11 +12956,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   gameOverUI: {fileID: 131102358}
+  winUI: {fileID: 0}
   jumpSound: {fileID: 8300000, guid: 92e6b3cb4ca2f6f4a80dc76861252e03, type: 3}
   collectedSound: {fileID: 8300000, guid: 11a0d22d82d667a408fd7ca08c35dd86, type: 3}
   hitSound: {fileID: 8300000, guid: d94c924e061edb147a56f04edbba5716, type: 3}
   deadSound: {fileID: 8300000, guid: e3a6af0bea391804380643439b966c1f, type: 3}
   winSound: {fileID: 8300000, guid: fc7eba385c2487b49bccc08f618c1da2, type: 3}
+  currentLevel: 3
 --- !u!70 &1526140840
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
