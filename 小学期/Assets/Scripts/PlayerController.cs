@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
                 isWin = true;
                 PlayerRigidbody.simulated = false;
                 WinSound();
-                gameEndUI.gameObject.SetActive(true);
+                //gameEndUI.gameObject.SetActive(true);
                 Invoke(nameof(LoadNextScene), 0.5f);
             }
         }
