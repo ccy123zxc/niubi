@@ -8,7 +8,7 @@ public class UIController : MonoBehaviour
 {
     // Start is called before the first frame update
     RectMask2D UImask;
-    float paddingNum = 750;
+    float paddingNum = 800;
 
     Button againBtn;
     Button quitBtn;

@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
                 isWin = true;
                 PlayerRigidbody.simulated = false;
                 WinSound();
-                Invoke(nameof(LoadNextScene), 2f);
+                Invoke(nameof(LoadNextScene), 0.5f);
                 
             }
         }
